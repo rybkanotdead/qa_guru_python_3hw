@@ -1,3 +1,4 @@
+from random import randint
 
 
 def test_greeting():
@@ -47,16 +48,15 @@ def test_circle():
 
     assert length == 144.51326206513048
 
+import random
+import pytest
+@pytest.mark.parametrize('execution_number', range(50))
+def test_random_list(execution_number):
 
-def test_random_list():
-    """
-    Создайте список из 10 случайных чисел от 1 до 100 (включая обе границы) и отсортируйте его по возрастанию.
-    """
-    # TODO создайте список
-    from random import randint
-    l = [randint(1,101) for i in range(10)]
+    l = [random.randint(1, 100) for _ in range(10)]
     l.sort()
     assert len(l) == 10
+    assert l[9] < 101
     assert all(l[i] <= l[i + 1] for i in range(len(l) - 1))
 
 
@@ -66,7 +66,7 @@ def test_unique_elements():
     """
     l = [1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 8, 9, 10, 10]
     # TODO удалите повторяющиеся элементы
-    l = list(dict.fromkeys(l))
+    l = list(set(l))
     assert isinstance(l, list)
     assert len(l) == 10
     assert l == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
